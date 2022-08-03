@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthexa.c                                       :+:      :+:    :+:   */
+/*   error_msg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rade-sar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/16 16:19:07 by rade-sar          #+#    #+#             */
-/*   Updated: 2021/12/16 16:40:24 by rade-sar         ###   ########.fr       */
+/*   Created: 2022/08/01 19:51:53 by rade-sar          #+#    #+#             */
+/*   Updated: 2022/08/03 16:56:13 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/philo.h"
 
-int	ft_puthexa(unsigned int n, char *base)
+void	error_msg(char *str)
 {
-	int		size;
-
-	size = 0;
-	if (n > 15)
-	{
-		size += ft_puthexa((n / 16), base);
-		size += ft_putchar(base[n % 16]);
-	}
-	else
-		size += ft_putchar(base[n]);
-	return (size);
+	write(2, RED, 7);
+	write(2, "\nError\n", 7);
+	write(2, RESET, 4);
+	write(2, str, ft_strlen(str));
+	write(2, "\n", 1);
 }

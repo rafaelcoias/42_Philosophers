@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   wrire_log.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rade-sar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/21 16:24:25 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/04/21 16:25:04 by rade-sar         ###   ########.fr       */
+/*   Created: 2022/08/03 16:02:58 by rade-sar          #+#    #+#             */
+/*   Updated: 2022/08/03 16:10:52 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	int	i;
+#include "../include/philo.h"
 
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
-		i++;
-	return (s1[i] - s2[i]);
+void	write_log(int time, int philo, char *log)
+{
+	printf(YELLOW);
+	printf("%i %i %s", time, philo, log);
+	printf(RESET);
 }

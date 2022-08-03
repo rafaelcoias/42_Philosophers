@@ -8,7 +8,12 @@ BONUS =
 
 SRC_PATH = ./src/
 
-SRC = $(SRC_PATH)main.c
+SRC = $(SRC_PATH)main.c	\
+		$(SRC_PATH)check.c	\
+		$(SRC_PATH)error_msg.c	\
+		$(SRC_PATH)utils.c	\
+		$(SRC_PATH)write_logs.c	\
+		$(SRC_PATH)simulation.c	\
 
 ########## 		  INCLUDES 		##########
 
@@ -16,9 +21,7 @@ HEAD = ./include
 
 ########## 		   LIBFT 		##########
 
-LIBFT = libft
-
-LIBFT_PATH = ./include/libft/
+LIBFT = 
 
 ########## 		COMPILATION 	##########
 
@@ -39,11 +42,11 @@ RESET		=	\033[0m
 
 ########## 		  COMMANDS		##########
 
-MAKE_LIBFT = cd ${LIBFT_PATH} && make all
+MAKE_LIBFT = 
 
-CLEAN_LIBFT = cd ${LIBFT_PATH} && make clean -s
+CLEAN_LIBFT = 
 
-FCLEAN_LIBFT = cd ${LIBFT_PATH} && make fclean -s
+FCLEAN_LIBFT = 
 
 RM = rm -f
 
@@ -63,7 +66,7 @@ NORM_PROJ_MSG = @echo "\n<========== $(YELLOW)Norm $(NAME)$(RESET) ==========>\n
 
 ${NAME}: ${OBJ} 
 	${MAKE_LIBFT} -s
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L $(LIBFT_PATH) -lft
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
 ${BONUS}: 
 
@@ -75,19 +78,16 @@ all: ${NAME}
 bonus:
 
 clean:
-	${CLEAN_LIBFT}
 	${RM} ${OBJ}
 
 fclean: clean 
-	${FCLEAN_LIBFT}
-	${RM} ${NAME} ${BONUS}
+	${RM} ${NAME}
 	${REMOVED_MSG}
 	
 
 re:	fclean all
 
 norm:
-	@cd ${LIBFT_PATH} && make norm
 	${NORM_PROJ_MSG}
 	@cd ./src && norminette -R CheckForbiddenSourceHeader *.c && cd ../include && norminette -R CheckDefine *.h
 

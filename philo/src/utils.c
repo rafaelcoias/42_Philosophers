@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sqrt.c	                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rade-sar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,18 +10,41 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_sqrt(int nbr)
+#include "../include/philo.h"
+
+size_t	ft_strlen(const char *str)
 {
 	int	i;
 
 	i = 0;
-	if (nbr == 0)
-		return (0);
-	if (nbr == 1)
-		return (1);
-	while (i * i < nbr)
+	while (str && str[i] != '\0')
 		i++;
-	if (i * i == nbr)
-		return (i);
-	return (-1);
+	return (i);
+}
+
+long long	ft_atol(const char *str)
+{
+	long long	result;
+	int			sign;
+	int			i;
+
+	if (!str)
+		return (0);
+	result = 0;
+	sign = 1;
+	i = 0;
+	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+		i++;
+	if (str[i] && (str[i] == '-' || str[i] == '+'))
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] && str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	return (sign * result);
 }
