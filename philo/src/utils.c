@@ -6,11 +6,11 @@
 /*   By: rade-sar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 12:08:28 by rade-sar          #+#    #+#             */
-/*   Updated: 2021/10/26 12:09:30 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/08/17 21:01:15 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../philo.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -47,4 +47,14 @@ long long	ft_atol(const char *str)
 		i++;
 	}
 	return (sign * result);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+		i++;
+	return (s1[i] - s2[i]);
 }

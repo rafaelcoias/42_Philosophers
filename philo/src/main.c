@@ -6,11 +6,11 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:22:15 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/08/03 17:15:03 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/08/17 21:01:43 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../philo.h"
 
 static t_philo	*add_philo(t_philo *last, int id)
 {
@@ -50,6 +50,7 @@ static void	init_philo(t_data *data)
 
 static void	init_all(t_data *data)
 {
+	pthread_mutex_init(&data->mutex, NULL);
 	data->n_philo = ft_atol(data->argv[1]);
 	data->t_die = ft_atol(data->argv[2]);
 	data->t_eat = ft_atol(data->argv[3]);
@@ -79,4 +80,5 @@ int	main(int argc, char **argv)
 	check_all(&data);
 	init_all(&data);
 	start_simulation(&data);
+	return (0);
 }

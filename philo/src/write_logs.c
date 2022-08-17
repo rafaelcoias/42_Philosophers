@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wrire_log.c                                        :+:      :+:    :+:   */
+/*   write_logs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 16:02:58 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/08/03 16:10:52 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/08/17 21:01:24 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../philo.h"
 
 void	write_log(int time, int philo, char *log)
 {
 	printf(YELLOW);
-	printf("%i %i %s", time, philo, log);
+	if (!ft_strcmp(log, DIED))
+		printf(RED);
+	printf("%i %i %s\n", time, philo, log);
 	printf(RESET);
 }

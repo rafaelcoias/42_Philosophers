@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:29:02 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/08/03 17:15:29 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/08/17 20:57:57 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <ctype.h>
+# include <pthread.h>
+# include <time.h>
 
 /* COLORS */
 
@@ -56,19 +58,21 @@ typedef struct s_philo {
 	int				think;
 	int				fork;
 	int				death;
+	pthread_t		th;
 	struct s_philo	*last;
 	struct s_philo	*next;
 }	t_philo;
 
 typedef struct s_data {
-	char		**argv;
-	int		argc;
-	int		n_philo;
-	int		t_die;
-	int		t_eat;
-	int		t_sleep;
-	int		n_eat;
-	t_philo	*philo;
+	char					**argv;
+	int					argc;
+	int					n_philo;
+	int					t_die;
+	int					t_eat;
+	int					t_sleep;
+	int					n_eat;
+	pthread_mutex_t	mutex;
+	t_philo				*philo;
 }	t_data;
 
 /* FUNCTIONS */
@@ -82,5 +86,6 @@ void	start_simulation(t_data *data);
 
 size_t		ft_strlen(const char *str);
 long long	ft_atol(const char *str);
+int			ft_strcmp(const char *s1, const char *s2);
 
 #endif
