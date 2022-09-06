@@ -6,13 +6,13 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:22:15 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/08/17 21:01:43 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/06 02:41:57 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-static t_philo	*add_philo(t_philo *last, int id)
+static t_philo	*add_philo(t_philo *last, int id, t_data *data)
 {
 	t_philo	*philo;
 
@@ -20,12 +20,12 @@ static t_philo	*add_philo(t_philo *last, int id)
 	if (!philo)
 		error_msg(MALLOC_ERROR);
 	philo->id = id;
-	philo->eat = 0;
-	philo->sleep = 0;
-	philo->think = 0;
+	philo->ate = 0;
 	philo->death = 0;
+	philo->last_meal = 0;
 	philo->last = last;
 	philo->next = NULL;
+	philo->data = data;
 	return (philo);
 }
 
@@ -35,13 +35,17 @@ static void	init_philo(t_data *data)
 	t_philo	*first;
 	int		id;
 
-	philo = add_philo(NULL, 1);
+	philo = add_philo(NULL, 1, data);
+	if (pthread_create(&(philo->th), NULL, routine, philo))
+		error_msg(THREAD_ERROR);
 	first = philo;
 	id = 1;
 	while (++id <= data->n_philo)
 	{
-		philo->next = add_philo(philo, id);
+		philo->next = add_philo(philo, id, data);
 		philo = philo->next;
+		if (pthread_create(&(philo->th), NULL, routine, philo))
+			error_msg(THREAD_ERROR);
 	}
 	philo->next = first;
 	first->last = philo;
@@ -50,26 +54,35 @@ static void	init_philo(t_data *data)
 
 static void	init_all(t_data *data)
 {
-	pthread_mutex_init(&data->mutex, NULL);
+	if (pthread_mutex_init(&(data->mutex), NULL))
+		error_msg(MUTEX_ERROR);
 	data->n_philo = ft_atol(data->argv[1]);
 	data->t_die = ft_atol(data->argv[2]);
 	data->t_eat = ft_atol(data->argv[3]);
 	data->t_sleep = ft_atol(data->argv[4]);
 	data->n_eat = 0;
+	data->time = 0;
+	data->end = 0;
 	if (data->argv[5])
 		data->n_eat = ft_atol(data->argv[5]);
 	init_philo(data);
 }
-/*
-static void	print_philo(t_data *data)
+
+static void	check_death(t_data *data)
 {
-	for (int i = 0; i < data->n_philo; i++)
+	while (!data->end)
 	{
-		printf("Philo %i , last is philo %i , next is philo %i \n",
-			data->philo->id, data->philo->last->id, data->philo->next->id);
-		data->philo = data->philo->next;
+		while(data->philo)
+		{
+			if (data->philo->death)
+			{
+				data->end = 1;
+				break ;
+			}	
+			data->philo = data->philo->next;
+		}
 	}
-}*/
+}
 
 int	main(int argc, char **argv)
 {
@@ -79,6 +92,7 @@ int	main(int argc, char **argv)
 	data.argc = argc;
 	check_all(&data);
 	init_all(&data);
-	start_simulation(&data);
+	check_death(&data);
+	end_simulation(&data);
 	return (0);
 }

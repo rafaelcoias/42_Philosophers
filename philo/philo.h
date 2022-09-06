@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:29:02 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/08/17 20:57:57 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/06 02:17:23 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,24 @@
 
 /* ERRORS */
 
-# define N_ARGS_ERROR "Wrong numbers of arguments."
-# define ARG_ERROR "Invalid argument."
-# define MALLOC_ERROR "Malloc error."
+# define N_ARGS_ERROR "Wrong numbers of arguments.\n"
+# define ARG_ERROR "Invalid argument.\n"
+# define MALLOC_ERROR "Malloc error.\n"
+# define MUTEX_ERROR "Creating mutex.\n"
+# define THREAD_ERROR "Creating thread.\n"
 
 /* LISTS */
 
 typedef struct s_philo {
 	int				id;
-	int				eat;
-	int				sleep;
-	int				think;
+	int				ate;
 	int				fork;
 	int				death;
+	int				last_meal;
 	pthread_t		th;
 	struct s_philo	*last;
 	struct s_philo	*next;
+	struct s_data	*data;
 }	t_philo;
 
 typedef struct s_data {
@@ -71,6 +73,8 @@ typedef struct s_data {
 	int					t_eat;
 	int					t_sleep;
 	int					n_eat;
+	int					end;
+	int					time;
 	pthread_mutex_t	mutex;
 	t_philo				*philo;
 }	t_data;
@@ -79,8 +83,12 @@ typedef struct s_data {
 
 void	check_all(t_data *data);
 void	error_msg(char *str);
-void	write_log(int time, int philo, char *log);
-void	start_simulation(t_data *data);
+void	write_logs(int time, int philo, char *log, t_data *data);
+void	end_simulation(t_data *data);
+
+/* ROUTINE */
+
+void	*routine(void *data);
 
 /* UTILS */
 

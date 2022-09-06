@@ -13,7 +13,7 @@ SRC = $(SRC_PATH)main.c	\
 		$(SRC_PATH)error_msg.c	\
 		$(SRC_PATH)utils.c	\
 		$(SRC_PATH)write_logs.c	\
-		$(SRC_PATH)simulation.c	\
+		$(SRC_PATH)end_simulation.c	\
 		$(SRC_PATH)routine.c		\
 
 ########## 		  INCLUDES 		##########
@@ -32,7 +32,7 @@ CC = gcc
 
 ########## 		   FLAGS 		##########
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -pthread
 
 ########## 		   COLORS 		##########
 
