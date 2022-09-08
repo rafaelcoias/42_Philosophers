@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:22:15 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/06 02:41:57 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/08 01:45:39 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	init_philo(t_data *data)
 	int		id;
 
 	philo = add_philo(NULL, 1, data);
+	data->t0 = get_time();
 	if (pthread_create(&(philo->th), NULL, routine, philo))
 		error_msg(THREAD_ERROR);
 	first = philo;
@@ -61,8 +62,10 @@ static void	init_all(t_data *data)
 	data->t_eat = ft_atol(data->argv[3]);
 	data->t_sleep = ft_atol(data->argv[4]);
 	data->n_eat = 0;
-	data->time = 0;
+	data->all_ate = 0;
+		error_msg(MUTEX_ERROR);
 	data->end = 0;
+	data->t0 = 0;
 	if (data->argv[5])
 		data->n_eat = ft_atol(data->argv[5]);
 	init_philo(data);
@@ -73,8 +76,9 @@ static void	check_death(t_data *data)
 	while (!data->end)
 	{
 		while(data->philo)
+		error_msg(MUTEX_ERROR);
 		{
-			if (data->philo->death)
+			if (data->end || data->philo->death)
 			{
 				data->end = 1;
 				break ;
@@ -92,6 +96,7 @@ int	main(int argc, char **argv)
 	data.argc = argc;
 	check_all(&data);
 	init_all(&data);
+	//pthread_join(data.philo->th, NULL);
 	check_death(&data);
 	end_simulation(&data);
 	return (0);

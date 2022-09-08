@@ -1,8 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/09/07 23:32:46 by rade-sar          #+#    #+#              #
+#    Updated: 2022/09/07 23:53:31 by rade-sar         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 ########## 		   NAMES 		##########
 
 NAME = philo
-
-BONUS = 
 
 ########## 		  SOURCES 		##########
 
@@ -37,8 +47,11 @@ CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -pthread
 ########## 		   COLORS 		##########
 
 GREEN		=	\033[0;32m
-YELLOW		=	\033[0;33m
+YELLOW	=	\033[0;33m
 RED		=	\033[0;31m
+BLUE_PISK		=	\033[0;34;5;199m
+BLUE		=	\033[0;36m
+VIOLET	=	\033[0;38;5;199m
 RESET		=	\033[0m
 
 ########## 		  COMMANDS		##########
@@ -66,7 +79,6 @@ NORM_PROJ_MSG = @echo "\n<========== $(YELLOW)Norm $(NAME)$(RESET) ==========>\n
 ########## 		  TARGETS 		##########
 
 ${NAME}: ${OBJ} 
-	${MAKE_LIBFT} -s
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 
 ${BONUS}: 

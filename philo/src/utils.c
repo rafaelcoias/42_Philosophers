@@ -6,7 +6,7 @@
 /*   By: rade-sar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 12:08:28 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/08/17 21:01:15 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/08 00:26:15 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,13 @@ int	ft_strcmp(const char *s1, const char *s2)
 	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
 		i++;
 	return (s1[i] - s2[i]);
+}
+
+long long	get_time()
+{
+	struct timeval	time;
+	
+	if (gettimeofday(&time, NULL))
+		error_msg(TIME_ERROR);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
