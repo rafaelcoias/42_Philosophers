@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:22:15 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/08 01:45:39 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/08 04:26:31 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void	init_philo(t_data *data)
 
 	philo = add_philo(NULL, 1, data);
 	data->t0 = get_time();
+	if (pthread_mutex_init(&(data->fork[0]), NULL))
+		error_msg(MUTEX_ERROR);
 	if (pthread_create(&(philo->th), NULL, routine, philo))
 		error_msg(THREAD_ERROR);
 	first = philo;
@@ -45,6 +47,8 @@ static void	init_philo(t_data *data)
 	{
 		philo->next = add_philo(philo, id, data);
 		philo = philo->next;
+		if (pthread_mutex_init(&(data->fork[id - 1]), NULL))
+				error_msg(MUTEX_ERROR);
 		if (pthread_create(&(philo->th), NULL, routine, philo))
 			error_msg(THREAD_ERROR);
 	}
@@ -55,36 +59,32 @@ static void	init_philo(t_data *data)
 
 static void	init_all(t_data *data)
 {
-	if (pthread_mutex_init(&(data->mutex), NULL))
-		error_msg(MUTEX_ERROR);
 	data->n_philo = ft_atol(data->argv[1]);
 	data->t_die = ft_atol(data->argv[2]);
 	data->t_eat = ft_atol(data->argv[3]);
 	data->t_sleep = ft_atol(data->argv[4]);
 	data->n_eat = 0;
 	data->all_ate = 0;
-		error_msg(MUTEX_ERROR);
 	data->end = 0;
 	data->t0 = 0;
 	if (data->argv[5])
 		data->n_eat = ft_atol(data->argv[5]);
+	if (pthread_mutex_init(&(data->mutex), NULL))
+		error_msg(MUTEX_ERROR);
+	data->fork = malloc(sizeof(pthread_mutex_t) * data->n_philo);
 	init_philo(data);
 }
 
-static void	check_death(t_data *data)
+static void	join_threads(t_data *data)
 {
-	while (!data->end)
+	int	i;
+
+	i = 0;
+	while (i != data->n_philo)
 	{
-		while(data->philo)
-		error_msg(MUTEX_ERROR);
-		{
-			if (data->end || data->philo->death)
-			{
-				data->end = 1;
-				break ;
-			}	
-			data->philo = data->philo->next;
-		}
+		pthread_join(data->philo->th, NULL);
+		data->philo = data->philo->next;
+		i++;
 	}
 }
 
@@ -96,8 +96,7 @@ int	main(int argc, char **argv)
 	data.argc = argc;
 	check_all(&data);
 	init_all(&data);
-	//pthread_join(data.philo->th, NULL);
-	check_death(&data);
+	join_threads(&data);
 	end_simulation(&data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:29:02 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/08 01:45:58 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/08 05:48:29 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /* INCLUDES */
 
-# include <stdbool.h>
+#include <stdbool.h>
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -31,13 +31,15 @@
 # define RED	"\033[0;31m"
 # define YELLOW	"\033[0;33m"
 # define GREEN	"\033[1;32m"
+# define BLUE "\033[1;34m"
 # define RESET	"\033[0m"
 
 /* DEFINES */
 
 # define TRUE 1
 # define FALSE 0
-# define FORK_TAKEN "has taken a fork"
+# define R_FORK_TAKEN "has taken the right fork"
+# define L_FORK_TAKEN "has taken the left fork"
 # define EATING "is eating"
 # define SLEEPING "is sleeping"
 # define THINKING "is thinking"
@@ -69,14 +71,15 @@ typedef struct s_data {
 	char					**argv;
 	int					argc;
 	int					n_philo;
-	int					t_die;
-	int					t_eat;
-	int					t_sleep;
+	long long			t_die;
+	long long			t_eat;
+	long long			t_sleep;
 	int					n_eat;
 	int					all_ate;
 	int					end;
 	long long			t0;
 	pthread_mutex_t	mutex;
+	pthread_mutex_t	*fork;
 	t_philo				*philo;
 }	t_data;
 
