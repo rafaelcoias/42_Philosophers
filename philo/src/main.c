@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:22:15 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/08 04:26:31 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/09 01:32:19 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static t_philo	*add_philo(t_philo *last, int id, t_data *data)
 	philo->ate = 0;
 	philo->death = 0;
 	philo->last_meal = 0;
+	philo->ate_all = 0;
 	philo->last = last;
 	philo->next = NULL;
 	philo->data = data;
@@ -69,10 +70,18 @@ static void	init_all(t_data *data)
 	data->t0 = 0;
 	if (data->argv[5])
 		data->n_eat = ft_atol(data->argv[5]);
+	data->fork = malloc(sizeof(pthread_mutex_t) * data->n_philo);
+	if (data->n_philo == 1)
+	{
+		data->philo = add_philo(NULL, 1, data);
+		do_one_philo(data);
+		return ;
+	}
 	if (pthread_mutex_init(&(data->mutex), NULL))
 		error_msg(MUTEX_ERROR);
-	data->fork = malloc(sizeof(pthread_mutex_t) * data->n_philo);
 	init_philo(data);
+	if (pthread_create(&(data->th), NULL, check_end, data))
+		error_msg(THREAD_ERROR);
 }
 
 static void	join_threads(t_data *data)
@@ -80,12 +89,21 @@ static void	join_threads(t_data *data)
 	int	i;
 
 	i = 0;
+	if (data->n_philo == 1)
+	{		
+		if (pthread_join(data->philo->th, NULL))
+			error_msg(JOIN_THREAD);
+		return ;
+	}
 	while (i != data->n_philo)
 	{
-		pthread_join(data->philo->th, NULL);
+		if (pthread_join(data->philo->th, NULL))
+			error_msg(JOIN_THREAD);
 		data->philo = data->philo->next;
 		i++;
 	}
+	if (pthread_join(data->th, NULL))
+		error_msg(JOIN_THREAD);
 }
 
 int	main(int argc, char **argv)

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/29 22:29:02 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/08 05:48:29 by rade-sar         ###   ########.fr       */
+/*   Created: 2022/09/08 19:27:49 by rade-sar          #+#    #+#             */
+/*   Updated: 2022/09/09 02:18:08 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /* INCLUDES */
 
-#include <stdbool.h>
+# include <stdbool.h>
 # include <string.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -52,7 +52,9 @@
 # define MALLOC_ERROR "Malloc error.\n"
 # define MUTEX_ERROR "Creating mutex.\n"
 # define THREAD_ERROR "Creating thread.\n"
-# define TIME_ERROR "Get time error.\n"
+# define JOIN_THREAD "Joining thread.\n"
+# define DESTROY_MUTEX "Destroying mutex.\n"
+# define TIME_ERROR "Getting time.\n"
 
 /* LISTS */
 
@@ -60,6 +62,7 @@ typedef struct s_philo {
 	int				id;
 	int				ate;
 	int				death;
+	int				ate_all;
 	long long		last_meal;
 	pthread_t		th;
 	struct s_philo	*last;
@@ -78,6 +81,7 @@ typedef struct s_data {
 	int					all_ate;
 	int					end;
 	long long			t0;
+	pthread_t			th;
 	pthread_mutex_t	mutex;
 	pthread_mutex_t	*fork;
 	t_philo				*philo;
@@ -89,13 +93,16 @@ void	check_all(t_data *data);
 void	error_msg(char *str);
 void	write_logs(int philo, char *log, t_data *data);
 void	end_simulation(t_data *data);
-void	*routine(void *data);
-long long	get_time();
+void	do_one_philo(t_data *data);
+void	*routine(void *p);
+void	*one_philo(void *p);
+void	*check_end(void *d);
 
 /* UTILS */
 
 int			ft_strcmp(const char *s1, const char *s2);
 size_t		ft_strlen(const char *str);
 long long	ft_atol(const char *str);
+long long	get_time();
 
 #endif
