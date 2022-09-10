@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 17:16:04 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/09 02:19:44 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/10 22:10:28 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,13 @@ void	end_simulation(t_data *data)
 		free(data->philo);
 	free(data->fork);
 	if (data->n_philo != 1)
-		if (pthread_mutex_destroy(&(data->mutex)))
+	{
+		if (pthread_mutex_destroy(&(data->logs)))
 			error_msg(DESTROY_MUTEX);
+		if (pthread_mutex_destroy(&(data->check_death)))
+			error_msg(DESTROY_MUTEX);
+	}
+	
 }
 
 void	*check_end(void *d)
@@ -42,6 +47,7 @@ void	*check_end(void *d)
 	philo = data->philo;
 	while (!data->end)
 	{
+		pthread_mutex_lock(&data->check_death);
 		if (philo->last_meal &&
 				get_time() - data->t0 - philo->last_meal > data->t_die)
 		{
@@ -50,6 +56,7 @@ void	*check_end(void *d)
 			printf("%s%lli ms%s | %sPhilo %i %s\n", BLUE,
 			 get_time() - data->t0, RESET, RED, philo->id, DIED);
 		}
+		pthread_mutex_unlock(&data->check_death);
 		if (data->n_eat && data->all_ate == data->n_philo)
 			data->end = 1;
 		if (data->philo->death || data->end)

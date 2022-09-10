@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:22:15 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/09 01:32:19 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/10 22:12:36 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,17 @@ static void	init_all(t_data *data)
 	if (data->argv[5])
 		data->n_eat = ft_atol(data->argv[5]);
 	data->fork = malloc(sizeof(pthread_mutex_t) * data->n_philo);
+	if (!data->fork)
+		error_msg(MALLOC_ERROR);
 	if (data->n_philo == 1)
 	{
 		data->philo = add_philo(NULL, 1, data);
 		do_one_philo(data);
 		return ;
 	}
-	if (pthread_mutex_init(&(data->mutex), NULL))
+	if (pthread_mutex_init(&(data->logs), NULL))
+		error_msg(MUTEX_ERROR);
+	if (pthread_mutex_init(&(data->check_death), NULL))
 		error_msg(MUTEX_ERROR);
 	init_philo(data);
 	if (pthread_create(&(data->th), NULL, check_end, data))

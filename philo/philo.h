@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:27:49 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/09 02:18:08 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/10 22:10:06 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,9 @@ typedef struct s_data {
 	int					end;
 	long long			t0;
 	pthread_t			th;
-	pthread_mutex_t	mutex;
+	pthread_mutex_t	logs;
 	pthread_mutex_t	*fork;
+	pthread_mutex_t	check_death;
 	t_philo				*philo;
 }	t_data;
 

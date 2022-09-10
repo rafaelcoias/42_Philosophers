@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 19:52:22 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/09 01:37:41 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/10 22:00:08 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ static void	eat(t_data *data, t_philo *philo)
 	write_logs(philo->id, R_FORK_TAKEN, data);
 	pthread_mutex_lock(&data->fork[philo->id - 1]);	
 	write_logs(philo->id, L_FORK_TAKEN, data);
+	pthread_mutex_lock(&data->check_death);
 	philo->last_meal = get_time() - data->t0;
+	pthread_mutex_unlock(&data->check_death);
 	write_logs(philo->id, EATING, data);
 	usleep(data->t_eat * 1000);
 	pthread_mutex_unlock(&data->fork[i]);	
@@ -47,7 +49,7 @@ void	*routine(void *p)
 	while (!philo->ate_all && !philo->death && !data->end)
 	{
 		eat(data, philo);
-		write_logs(philo->id, SLEEPING, data);	
+		write_logs(philo->id, SLEEPING, data);
 		usleep(data->t_sleep * 1000);
 		write_logs(philo->id, THINKING, data);
 	}
