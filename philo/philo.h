@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:27:49 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/12 18:53:15 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/12 22:00:44 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@
 # define ARG_ERROR "Invalid argument.\n"
 # define MALLOC_ERROR "Malloc error.\n"
 # define MUTEX_ERROR "Creating mutex.\n"
-# define LOCK_MUTEX_ERROR "Locking/unlocking mutex.\n"
+# define LOCK_MUTEX_ERROR "Locking mutex.\n"
+# define UNLOCK_MUTEX_ERROR "Unlocking mutex.\n"
+# define DESTROY_MUTEX "Destroying mutex.\n"
 # define THREAD_ERROR "Creating thread.\n"
 # define JOIN_THREAD "Joining thread.\n"
-# define DESTROY_MUTEX "Destroying mutex.\n"
 # define TIME_ERROR "Getting time.\n"
 
 /* LISTS */
@@ -85,7 +86,7 @@ typedef struct s_data {
 	pthread_mutex_t		logs;
 	pthread_mutex_t		*fork;
 	pthread_mutex_t		check_end;
-	pthread_mutex_t		check_death;
+	pthread_mutex_t		check_lastmeal;
 	t_philo				*philo;
 }	t_data;
 
@@ -134,6 +135,6 @@ void		end_simulation(t_data *data);
 int			ft_strcmp(const char *s1, const char *s2);
 size_t		ft_strlen(const char *str);
 long long	ft_atol(const char *str);
-long long	get_time(void);
+long long	get_time(long long t0);
 
 #endif

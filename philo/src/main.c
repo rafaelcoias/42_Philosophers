@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 22:22:15 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/12 11:05:27 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/12 22:45:48 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	check_all(&data);
 	init_all(&data);
 	join_threads(&data);
-	usleep(10000);
+	usleep(10 * 1000);
 	end_simulation(&data);
 	return (0);
 }

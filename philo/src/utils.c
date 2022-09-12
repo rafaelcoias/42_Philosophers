@@ -6,7 +6,7 @@
 /*   By: rade-sar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 12:08:28 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/08 00:26:15 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/12 22:00:34 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (s1[i] - s2[i]);
 }
 
-long long	get_time(void)
+long long	get_time(long long t0)
 {
 	struct timeval	time;
 
 	if (gettimeofday(&time, NULL))
 		error_msg(TIME_ERROR);
-	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+	return ((time.tv_sec * 1000 + time.tv_usec / 1000) - t0);
 }

@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:57:32 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/12 10:39:25 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/12 22:00:59 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	create_threads(t_data *data)
 	int	i;
 
 	i = 0;
-	data->t0 = get_time();
+	data->t0 = get_time(0);
 	while (i != data->n_philo)
 	{
 		if (pthread_create(&(data->philo->th), NULL, routine, data->philo))

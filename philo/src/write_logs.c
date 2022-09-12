@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 16:02:58 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/12 10:54:50 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/12 22:48:03 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	write_logs(int philo, char *log, t_data *data)
 {
 	char	*color;
 
-	lock_mutex(data->logs);
 	color = YELLOW;
 	if (!ft_strcmp(log, DIED))
 		color = RED;
@@ -25,14 +24,14 @@ void	write_logs(int philo, char *log, t_data *data)
 	lock_mutex(data->check_end);
 	if (data->end)
 	{
-		unlock_mutex(data->logs);
 		unlock_mutex(data->check_end);
 		return ;
 	}
-	printf("%s%lli ms%s | %sPhilo %i %s\n", BLUE,
-		get_time() - data->t0, RESET, color, philo, log);
-	printf(RESET);
 	unlock_mutex(data->check_end);
+	lock_mutex(data->logs);
+	printf("%s%lli ms%s | %sPhilo %i %s\n", BLUE,
+		get_time(data->t0), RESET, color, philo, log);
+	printf(RESET);
 	unlock_mutex(data->logs);
 }
 

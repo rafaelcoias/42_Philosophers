@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:52:45 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/12 11:04:21 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/12 22:50:18 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	*one_philo(void *p)
 	philo = (t_philo *)p;
 	data = philo->data;
 	printf("%s%lli ms%s | %sPhilo %i %s\n", BLUE,
-		get_time() - data->t0, RESET, YELLOW, 1, L_FORK_TAKEN);
+		get_time(data->t0), RESET, YELLOW, 1, L_FORK_TAKEN);
 	printf("%s%lli ms%s | %sPhilo %i %s\n", BLUE,
-		get_time() - data->t0, RESET, RED, 1, DIED);
+		get_time(data->t0), RESET, RED, 1, DIED);
 	return (NULL);
 }
 
 void	do_one_philo(t_data *data)
 {
-	data->t0 = get_time();
+	data->t0 = get_time(0);
 	if (pthread_create(&(data->philo->th), NULL, one_philo, data->philo))
 		error_msg(THREAD_ERROR);
 }
