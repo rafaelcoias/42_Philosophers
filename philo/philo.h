@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:27:49 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/10 22:10:06 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/12 10:59:20 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 # define ARG_ERROR "Invalid argument.\n"
 # define MALLOC_ERROR "Malloc error.\n"
 # define MUTEX_ERROR "Creating mutex.\n"
+# define LOCK_MUTEX_ERROR "Locking/unlocking mutex.\n"
 # define THREAD_ERROR "Creating thread.\n"
 # define JOIN_THREAD "Joining thread.\n"
 # define DESTROY_MUTEX "Destroying mutex.\n"
@@ -88,16 +89,46 @@ typedef struct s_data {
 	t_philo				*philo;
 }	t_data;
 
-/* FUNCTIONS */
+/*		FUNCTIONS	 */
+
+/* CHECK */
 
 void	check_all(t_data *data);
-void	error_msg(char *str);
-void	write_logs(int philo, char *log, t_data *data);
-void	end_simulation(t_data *data);
+
+/* PHILOS */
+
 void	do_one_philo(t_data *data);
+void	create_philos(t_data *data);
+t_philo	*add_philo(t_philo *last, int id, t_data *data);
+
+/* MUTEXES */
+
+void	create_mutexes(t_data *data);
+void	create_forks(t_data *data);
+void	destroy_mutex(pthread_mutex_t mutex);
+void	lock_mutex(pthread_mutex_t mutex);
+void	unlock_mutex(pthread_mutex_t mutex);
+
+/* THREADS */
+
+void	join_threads(t_data *data);
+void	create_threads(t_data *data);
+
+/* ROUTINE */
+
 void	*routine(void *p);
 void	*one_philo(void *p);
+
+/* WRITE LOGS */
+
+void	error_msg(char *str);
+void	write_logs(int philo, char *log, t_data *data);
+
+/* END SIMULATION */
+
 void	*check_end(void *d);
+void	end_simulation(t_data *data);
+
 
 /* UTILS */
 
