@@ -18,11 +18,11 @@ void	create_forks(t_data *data)
 
 	i = 0;
 	while (i != data->n_philo)
-		{
-			if (pthread_mutex_init(&(data->fork[i]), NULL))
-				error_msg(MUTEX_ERROR);
-			data->philo = data->philo->next;
-			i++;
+	{
+		if (pthread_mutex_init(&(data->fork[i]), NULL))
+			error_msg(MUTEX_ERROR);
+		data->philo = data->philo->next;
+		i++;
 	}
 }
 
@@ -34,7 +34,7 @@ void	create_mutexes(t_data *data)
 	create_forks(data);
 	if (pthread_mutex_init(&(data->logs), NULL))
 		error_msg(MUTEX_ERROR);
-	if (pthread_mutex_init(&(data->check_death), NULL))
+	if (pthread_mutex_init(&(data->check_end), NULL))
 		error_msg(MUTEX_ERROR);
 }
 

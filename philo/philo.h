@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#ifndef PHILO_H
+# define PHILO_H
 
 /* INCLUDES */
 
@@ -62,7 +62,6 @@
 typedef struct s_philo {
 	int				id;
 	int				ate;
-	int				death;
 	int				ate_all;
 	long long		last_meal;
 	pthread_t		th;
@@ -72,7 +71,7 @@ typedef struct s_philo {
 }	t_philo;
 
 typedef struct s_data {
-	char					**argv;
+	char				**argv;
 	int					argc;
 	int					n_philo;
 	long long			t_die;
@@ -83,9 +82,9 @@ typedef struct s_data {
 	int					end;
 	long long			t0;
 	pthread_t			th;
-	pthread_mutex_t	logs;
-	pthread_mutex_t	*fork;
-	pthread_mutex_t	check_death;
+	pthread_mutex_t		logs;
+	pthread_mutex_t		*fork;
+	pthread_mutex_t		check_end;
 	t_philo				*philo;
 }	t_data;
 
@@ -93,48 +92,47 @@ typedef struct s_data {
 
 /* CHECK */
 
-void	check_all(t_data *data);
+void		check_all(t_data *data);
 
 /* PHILOS */
 
-void	do_one_philo(t_data *data);
-void	create_philos(t_data *data);
-t_philo	*add_philo(t_philo *last, int id, t_data *data);
+void		do_one_philo(t_data *data);
+void		create_philos(t_data *data);
+t_philo		*add_philo(int id, t_data *data);
 
 /* MUTEXES */
 
-void	create_mutexes(t_data *data);
-void	create_forks(t_data *data);
-void	destroy_mutex(pthread_mutex_t mutex);
-void	lock_mutex(pthread_mutex_t mutex);
-void	unlock_mutex(pthread_mutex_t mutex);
+void		create_mutexes(t_data *data);
+void		create_forks(t_data *data);
+void		destroy_mutex(pthread_mutex_t mutex);
+void		lock_mutex(pthread_mutex_t mutex);
+void		unlock_mutex(pthread_mutex_t mutex);
 
 /* THREADS */
 
-void	join_threads(t_data *data);
-void	create_threads(t_data *data);
+void		join_threads(t_data *data);
+void		create_threads(t_data *data);
 
 /* ROUTINE */
 
-void	*routine(void *p);
-void	*one_philo(void *p);
+void		*routine(void *p);
+void		*one_philo(void *p);
 
 /* WRITE LOGS */
 
-void	error_msg(char *str);
-void	write_logs(int philo, char *log, t_data *data);
+void		error_msg(char *str);
+void		write_logs(int philo, char *log, t_data *data);
 
 /* END SIMULATION */
 
-void	*check_end(void *d);
-void	end_simulation(t_data *data);
-
+void		*check_end(void *d);
+void		end_simulation(t_data *data);
 
 /* UTILS */
 
 int			ft_strcmp(const char *s1, const char *s2);
 size_t		ft_strlen(const char *str);
 long long	ft_atol(const char *str);
-long long	get_time();
+long long	get_time(void);
 
 #endif

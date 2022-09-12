@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 17:16:04 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/12 11:05:09 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:41:39 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,19 @@ void	end_simulation(t_data *data)
 	}
 	free(data->fork);
 	destroy_mutex(data->logs);
-	destroy_mutex(data->check_death);
+	destroy_mutex(data->check_end);
+}
+
+static void	check_death(t_data *data, t_philo *philo)
+{
+	if (philo->last_meal
+		&& get_time() - data->t0 - philo->last_meal > data->t_die)
+	{
+		data->end = 1;
+		printf("%s%lli ms%s | %sPhilo %i %s\n", BLUE,
+			get_time() - data->t0, RESET, RED, philo->id, DIED);
+		break ;
+	}
 }
 
 void	*check_end(void *d)
@@ -42,23 +54,18 @@ void	*check_end(void *d)
 
 	data = (t_data *)d;
 	philo = data->philo;
-	while (!data->end)
+	while (1)
 	{
-		lock_mutex(data->check_death);
-		if (philo->last_meal &&
-				get_time() - data->t0 - philo->last_meal > data->t_die)
-		{
-			philo->death = 1;
-			data->end = 1;
-			printf("%s%lli ms%s | %sPhilo %i %s\n", BLUE,
-			 get_time() - data->t0, RESET, RED, philo->id, DIED);
-		}
-		unlock_mutex(data->check_death);
+		lock_mutex(data->check_end);
+		check_death(data, philo);
 		if (data->n_eat && data->all_ate == data->n_philo)
+		{
 			data->end = 1;
-		if (data->philo->death || data->end)
 			break ;
+		}
+		unlock_mutex(data->check_end);
 		philo = philo->next;
 	}
+	unlock_mutex(data->check_end);
 	return (NULL);
 }

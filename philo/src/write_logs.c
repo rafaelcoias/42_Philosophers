@@ -22,14 +22,17 @@ void	write_logs(int philo, char *log, t_data *data)
 		color = RED;
 	if (!ft_strcmp(log, EATING))
 		color = GREEN;
+	lock_mutex(data->check_end);
 	if (data->end)
 	{
 		unlock_mutex(data->logs);
+		unlock_mutex(data->check_end);
 		return ;
 	}
 	printf("%s%lli ms%s | %sPhilo %i %s\n", BLUE,
-		  get_time() - data->t0, RESET, color, philo, log);
+		get_time() - data->t0, RESET, color, philo, log);
 	printf(RESET);
+	unlock_mutex(data->check_end);
 	unlock_mutex(data->logs);
 }
 

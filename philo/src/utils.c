@@ -59,10 +59,10 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (s1[i] - s2[i]);
 }
 
-long long	get_time()
+long long	get_time(void)
 {
 	struct timeval	time;
-	
+
 	if (gettimeofday(&time, NULL))
 		error_msg(TIME_ERROR);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);

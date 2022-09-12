@@ -12,7 +12,6 @@
 
 #include "../philo.h"
 
-
 static void	init_all(t_data *data)
 {
 	data->n_philo = ft_atol(data->argv[1]);
@@ -37,6 +36,7 @@ int	main(int argc, char **argv)
 	check_all(&data);
 	init_all(&data);
 	join_threads(&data);
+	usleep(10000);
 	end_simulation(&data);
 	return (0);
 }

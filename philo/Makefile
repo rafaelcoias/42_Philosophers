@@ -44,7 +44,7 @@ CC = gcc
 
 ########## 		   FLAGS 		##########
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address -pthread
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread -pthread
 
 ########## 		   COLORS 		##########
 
@@ -104,6 +104,7 @@ re:	fclean all
 
 norm:
 	${NORM_PROJ_MSG}
-	@cd ./src && norminette -R CheckForbiddenSourceHeader *.c && cd ../include && norminette -R CheckDefine *.h
+	@cd ./src && norminette -R CheckForbiddenSourceHeader *.c
+	@norminette -R CheckDefine philo.h
 
 .PHONY: all clean fclean re norm

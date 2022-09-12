@@ -20,9 +20,9 @@ void	*one_philo(void *p)
 	philo = (t_philo *)p;
 	data = philo->data;
 	printf("%s%lli ms%s | %sPhilo %i %s\n", BLUE,
-		  get_time() - data->t0, RESET, YELLOW, 1, L_FORK_TAKEN);
+		get_time() - data->t0, RESET, YELLOW, 1, L_FORK_TAKEN);
 	printf("%s%lli ms%s | %sPhilo %i %s\n", BLUE,
-		  get_time() - data->t0, RESET, RED, 1, DIED);
+		get_time() - data->t0, RESET, RED, 1, DIED);
 	return (NULL);
 }
 
@@ -33,7 +33,7 @@ void	do_one_philo(t_data *data)
 		error_msg(THREAD_ERROR);
 }
 
-t_philo	*add_philo(t_philo *last, int id, t_data *data)
+t_philo	*add_philo(int id, t_data *data)
 {
 	t_philo	*philo;
 
@@ -42,10 +42,8 @@ t_philo	*add_philo(t_philo *last, int id, t_data *data)
 		error_msg(MALLOC_ERROR);
 	philo->id = id;
 	philo->ate = 0;
-	philo->death = 0;
 	philo->last_meal = 0;
 	philo->ate_all = 0;
-	philo->last = last;
 	philo->next = NULL;
 	philo->data = data;
 	return (philo);
@@ -59,16 +57,16 @@ void	create_philos(t_data *data)
 
 	if (data->n_philo == 1)
 	{
-		data->philo = add_philo(NULL, 1, data);
+		data->philo = add_philo(1, data);
 		do_one_philo(data);
 		return ;
 	}
-	philo = add_philo(NULL, 1, data);
+	philo = add_philo(1, data);
 	first = philo;
 	id = 1;
 	while (++id <= data->n_philo)
 	{
-		philo->next = add_philo(philo, id, data);
+		philo->next = add_philo(id, data);
 		philo = philo->next;
 	}
 	philo->next = first;
@@ -77,4 +75,3 @@ void	create_philos(t_data *data)
 	create_mutexes(data);
 	create_threads(data);
 }
-
