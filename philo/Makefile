@@ -6,7 +6,7 @@
 #    By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/07 23:32:46 by rade-sar          #+#    #+#              #
-#    Updated: 2022/09/12 11:01:43 by rade-sar         ###   ########.fr        #
+#    Updated: 2022/09/12 11:07:32 by rade-sar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ SRC_PATH = ./src/
 
 SRC = $(SRC_PATH)main.c	\
 		$(SRC_PATH)check.c	\
-		$(SRC_PATH)forks.c	\
 		$(SRC_PATH)mutexes.c	\
 		$(SRC_PATH)philos.c	\
 		$(SRC_PATH)threads.c	\
