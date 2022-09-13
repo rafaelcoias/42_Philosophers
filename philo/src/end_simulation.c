@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 17:16:04 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/13 15:22:54 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:01:49 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	end_simulation(t_data *data)
 	destroy_mutex(&data->logs);
 	destroy_mutex(&data->check_end);
 	destroy_mutex(&data->check_lastmeal);
+	destroy_mutex(&data->check_all_ate);
 }
 
 static int	check_death(t_data *data, t_philo *philo)
@@ -55,6 +56,18 @@ static int	check_death(t_data *data, t_philo *philo)
 	return (0);
 }
 
+static int	check_all_ate(t_data *data)
+{
+	int	i;
+
+	lock_mutex(&data->check_all_ate);
+	i = data->all_ate;
+	unlock_mutex(&data->check_all_ate);
+	if (i == data->n_philo)
+		return (1);
+	return (0);
+}
+
 void	*check_end(void *d)
 {
 	t_data	*data;
@@ -62,11 +75,7 @@ void	*check_end(void *d)
 
 	data = (t_data *)d;
 	philo = data->philo;
-	while (1)
-	{
-		if (check_death(data, philo))
-			break ;
+	while (!(check_all_ate(data) || check_death(data, philo)))
 		philo = philo->next;
-	}
 	return (NULL);
 }

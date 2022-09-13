@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:03:44 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/13 09:06:34 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:33:35 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ void	create_mutexes(t_data *data)
 		error_msg(MUTEX_ERROR);
 	if (pthread_mutex_init(&(data->check_lastmeal), NULL))
 		error_msg(MUTEX_ERROR);
+	if (pthread_mutex_init(&(data->check_all_ate), NULL))
+		error_msg(MUTEX_ERROR);
 }
 
 void	destroy_mutex(pthread_mutex_t *mutex)
 {
 	if (pthread_mutex_destroy(mutex))
-		error_msg(DESTROY_MUTEX);
+		error_msg(DESTROY_MUTEX_ERROR);
 }
 
 void	lock_mutex(pthread_mutex_t *mutex)

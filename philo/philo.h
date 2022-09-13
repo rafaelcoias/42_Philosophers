@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:27:49 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/13 09:04:27 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:34:03 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@
 # define MUTEX_ERROR "Creating mutex.\n"
 # define LOCK_MUTEX_ERROR "Locking mutex.\n"
 # define UNLOCK_MUTEX_ERROR "Unlocking mutex.\n"
-# define DESTROY_MUTEX "Destroying mutex.\n"
+# define DESTROY_MUTEX_ERROR "Destroying mutex.\n"
 # define THREAD_ERROR "Creating thread.\n"
-# define JOIN_THREAD "Joining thread.\n"
+# define JOIN_THREAD_ERROR "Joining thread.\n"
 # define TIME_ERROR "Getting time.\n"
 
 /* LISTS */
@@ -87,6 +87,7 @@ typedef struct s_data {
 	pthread_mutex_t		*fork;
 	pthread_mutex_t		check_end;
 	pthread_mutex_t		check_lastmeal;
+	pthread_mutex_t		check_all_ate;
 	t_philo				*philo;
 }	t_data;
 

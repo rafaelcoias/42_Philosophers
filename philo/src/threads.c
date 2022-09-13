@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:57:32 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/12 22:56:57 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:34:22 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ void	join_threads(t_data *data)
 	if (data->n_philo == 1)
 	{		
 		if (pthread_join(data->philo->th, NULL))
-			error_msg(JOIN_THREAD);
+			error_msg(JOIN_THREAD_ERROR);
 		return ;
 	}
 	while (i != data->n_philo)
 	{
 		if (pthread_join(data->philo->th, NULL))
-			error_msg(JOIN_THREAD);
+			error_msg(JOIN_THREAD_ERROR);
 		data->philo = data->philo->next;
 		i++;
 	}
 	if (pthread_join(data->th, NULL))
-		error_msg(JOIN_THREAD);
+		error_msg(JOIN_THREAD_ERROR);
 }
 
 void	create_threads(t_data *data)
