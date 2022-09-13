@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:27:49 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/12 22:00:44 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/13 09:04:27 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ t_philo		*add_philo(int id, t_data *data);
 
 void		create_mutexes(t_data *data);
 void		create_forks(t_data *data);
-void		destroy_mutex(pthread_mutex_t mutex);
-void		lock_mutex(pthread_mutex_t mutex);
-void		unlock_mutex(pthread_mutex_t mutex);
+void		destroy_mutex(pthread_mutex_t *mutex);
+void		lock_mutex(pthread_mutex_t *mutex);
+void		unlock_mutex(pthread_mutex_t *mutex);
 
 /* THREADS */
 

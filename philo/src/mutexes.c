@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 10:03:44 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/12 21:57:18 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/13 09:06:34 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,20 @@ void	create_mutexes(t_data *data)
 		error_msg(MUTEX_ERROR);
 }
 
-void	destroy_mutex(pthread_mutex_t mutex)
+void	destroy_mutex(pthread_mutex_t *mutex)
 {
-	if (pthread_mutex_destroy(&mutex))
+	if (pthread_mutex_destroy(mutex))
 		error_msg(DESTROY_MUTEX);
 }
 
-void	lock_mutex(pthread_mutex_t mutex)
+void	lock_mutex(pthread_mutex_t *mutex)
 {
-	if (pthread_mutex_lock(&mutex))
+	if (pthread_mutex_lock(mutex))
 		error_msg(LOCK_MUTEX_ERROR);
 }
 
-void	unlock_mutex(pthread_mutex_t mutex)
+void	unlock_mutex(pthread_mutex_t *mutex)
 {
-	if (pthread_mutex_unlock(&mutex))
+	if (pthread_mutex_unlock(mutex))
 		error_msg(UNLOCK_MUTEX_ERROR);
 }
