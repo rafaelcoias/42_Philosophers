@@ -6,31 +6,40 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 19:52:22 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/13 18:01:18 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/13 20:58:18 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
+static void	lock_forks(int *left, int *right, t_data *data, t_philo *philo)
+{
+	*left = philo->id - 1;
+	*right = philo->id;
+	if (philo->id == data->n_philo)
+	{
+		*right = *left;
+		*left = 0;	
+	}	
+	lock_mutex(&(data->fork[*right]));
+	write_logs(philo->id, R_FORK_TAKEN, data);
+	lock_mutex(&(data->fork[*left]));
+	write_logs(philo->id, L_FORK_TAKEN, data);
+}
+
 static void	eat(t_data *data, t_philo *philo)
 {
-	int	i;
+	int	left;
+	int	right;
 
-	if (philo->id == data->n_philo)
-		i = 0;
-	else
-		i = philo->id;
-	lock_mutex(&(data->fork[i]));
-	write_logs(philo->id, R_FORK_TAKEN, data);
-	lock_mutex(&(data->fork[philo->id - 1]));
-	write_logs(philo->id, L_FORK_TAKEN, data);
+	lock_forks(&left, &right, data, philo);
 	lock_mutex(&data->check_lastmeal);
 	philo->last_meal = get_time(data->t0);
 	unlock_mutex(&data->check_lastmeal);
 	write_logs(philo->id, EATING, data);
 	usleep(data->t_eat * 1000);
-	unlock_mutex(&(data->fork[i]));
-	unlock_mutex(&(data->fork[philo->id - 1]));
+	unlock_mutex(&(data->fork[left]));
+	unlock_mutex(&(data->fork[right]));
 	philo->ate++;
 	if (data->n_eat && data->n_eat == philo->ate)
 	{

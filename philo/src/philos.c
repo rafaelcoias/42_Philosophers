@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 09:52:45 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/12 22:50:18 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/13 20:26:27 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	create_philos(t_data *data)
 		philo = philo->next;
 	}
 	philo->next = first;
-	first->last = philo;
 	data->philo = first;
 	create_mutexes(data);
 	create_threads(data);

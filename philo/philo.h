@@ -6,7 +6,7 @@
 /*   By: rade-sar <rade-sar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 19:27:49 by rade-sar          #+#    #+#             */
-/*   Updated: 2022/09/13 17:34:03 by rade-sar         ###   ########.fr       */
+/*   Updated: 2022/09/13 20:26:06 by rade-sar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct s_philo {
 	int				ate_all;
 	long long		last_meal;
 	pthread_t		th;
-	struct s_philo	*last;
 	struct s_philo	*next;
 	struct s_data	*data;
 }	t_philo;
