@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	check_all(&data);
 	init_all(&data);
 	join_threads(&data);
-	usleep(10 * 1000);
+	ft_usleep(10);
 	end_simulation(&data);
 	return (0);
 }

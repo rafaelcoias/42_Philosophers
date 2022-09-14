@@ -67,3 +67,12 @@ long long	get_time(long long t0)
 		error_msg(TIME_ERROR);
 	return ((time.tv_sec * 1000 + time.tv_usec / 1000) - t0);
 }
+
+void	ft_usleep(long long time)
+{
+	long long	t;
+
+	t = get_time(0) + time;
+	while (get_time(0) < t)
+		usleep(10);
+}

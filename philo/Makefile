@@ -14,9 +14,15 @@
 
 NAME = philo
 
+BONUS =
+
 ########## 		  SOURCES 		##########
 
 SRC_PATH = ./src/
+
+OBJ_DIR = objs
+
+OBJ_PATH = $(OBJ_DIR)/
 
 SRC = $(SRC_PATH)main.c	\
 		$(SRC_PATH)check.c	\
@@ -28,9 +34,11 @@ SRC = $(SRC_PATH)main.c	\
 		$(SRC_PATH)end_simulation.c	\
 		$(SRC_PATH)routine.c		\
 
+BNS =
+
 ########## 		  INCLUDES 		##########
 
-HEAD = ./include
+HEAD = ./
 
 ########## 		   LIBFT 		##########
 
@@ -38,13 +46,17 @@ LIBFT =
 
 ########## 		COMPILATION 	##########
 
-OBJ = ${SRC:.c=.o}
+OBJ = $(patsubst %.c, %.o, $(subst $(SRC_PATH), $(OBJ_PATH), $(SRC)))
 
 CC = gcc
 
 ########## 		   FLAGS 		##########
 
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread -pthread
+CFLAGS = -Wall -Wextra -Werror -g
+
+THR_FLAGS = -fsanitize=thread -pthread
+
+MLC_FLAGS = -fsanitize=address
 
 ########## 		   COLORS 		##########
 
@@ -64,7 +76,7 @@ CLEAN_LIBFT =
 
 FCLEAN_LIBFT = 
 
-RM = rm -f
+RM = rm -rf
 
 ########## 		  MESSAGES 		##########
 
@@ -78,12 +90,21 @@ NORM_LIBFT_MSG = @echo "\n<========== $(YELLOW)Norm $(LIBFT)$(RESET) ==========>
 
 NORM_PROJ_MSG = @echo "\n<========== $(YELLOW)Norm $(NAME)$(RESET) ==========>\n"
 
+NORM_CORRECT = @echo "\nNorminette: [$(GREEN)OK$(RESET)]\n"
+
 ########## 		  TARGETS 		##########
 
-${NAME}: ${OBJ} 
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+${NAME}: ${OBJ_DIR} ${OBJ}
+	$(CC) $(CFLAGS) $(THR_FLAGS) -o $(NAME) $(OBJ)
 
 ${BONUS}: 
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(OBJ_PATH)%.o:	$(SRC_PATH)%.c | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -I $(HEAD) -c $(^) -o $(@)
+	@echo "$(YELLOW)[ Compiling $(subst .o,.c,$(notdir $@)) ]$(RESET)"
 
 ########## 		   RULES 		##########
 
@@ -93,12 +114,11 @@ all: ${NAME}
 bonus:
 
 clean:
-	${RM} ${OBJ}
+	${RM} ${OBJ_PATH}
 
 fclean: clean 
 	${RM} ${NAME}
 	${REMOVED_MSG}
-	
 
 re:	fclean all
 
@@ -106,5 +126,8 @@ norm:
 	${NORM_PROJ_MSG}
 	@cd ./src && norminette -R CheckForbiddenSourceHeader *.c
 	@norminette -R CheckDefine philo.h
+	${NORM_CORRECT}
+
+.SILENT: ${OBJ} ${NAME} ${OBJ_DIR} clean fclean
 
 .PHONY: all clean fclean re norm

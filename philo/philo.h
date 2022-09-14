@@ -38,6 +38,7 @@
 
 # define TRUE 1
 # define FALSE 0
+# define MILISECOND 1000
 # define R_FORK_TAKEN "has taken the right fork"
 # define L_FORK_TAKEN "has taken the left fork"
 # define EATING "is eating"
@@ -136,5 +137,6 @@ int			ft_strcmp(const char *s1, const char *s2);
 size_t		ft_strlen(const char *str);
 long long	ft_atol(const char *str);
 long long	get_time(long long t0);
+void		ft_usleep(long long time);
 
 #endif

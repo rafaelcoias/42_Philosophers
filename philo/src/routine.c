@@ -19,7 +19,7 @@ static void	lock_forks(int *left, int *right, t_data *data, t_philo *philo)
 	if (philo->id == data->n_philo)
 	{
 		*right = *left;
-		*left = 0;	
+		*left = 0;
 	}	
 	lock_mutex(&(data->fork[*right]));
 	write_logs(philo->id, R_FORK_TAKEN, data);
@@ -37,7 +37,7 @@ static void	eat(t_data *data, t_philo *philo)
 	philo->last_meal = get_time(data->t0);
 	unlock_mutex(&data->check_lastmeal);
 	write_logs(philo->id, EATING, data);
-	usleep(data->t_eat * 1000);
+	ft_usleep(data->t_eat);
 	unlock_mutex(&(data->fork[left]));
 	unlock_mutex(&(data->fork[right]));
 	philo->ate++;
@@ -70,14 +70,14 @@ void	*routine(void *p)
 	philo = (t_philo *)p;
 	data = philo->data;
 	if (philo->id % 2 == 0)
-		usleep(10 * 1000);
+		ft_usleep(10);
 	while (check_death(data))
 	{
 		eat(data, philo);
 		if (philo->ate_all)
 			break ;
 		write_logs(philo->id, SLEEPING, data);
-		usleep(data->t_sleep * 1000);
+		ft_usleep(data->t_sleep);
 		write_logs(philo->id, THINKING, data);
 	}
 	return (NULL);
