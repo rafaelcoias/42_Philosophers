@@ -47,6 +47,12 @@ In the philo program there can be a lot of threads. That means each philosopher(
 
 This <a href="https://www.youtube.com/watch?v=d9s_d28yJq0&t=287s">video</a> explains how to use threads in your C program.
 
+<details><summary>Example</summary>
+  
+  ![image](https://user-images.githubusercontent.com/91686183/190930361-324d337c-5960-4ea3-973a-1315be931b0f.png)
+
+</details>
+
 ### Mutexes
 
 Because each philosopher must eat using his and other philosopher's fork, there can be an issue when two philosophers try the same fork at the same time 
@@ -59,8 +65,8 @@ This <a href="https://www.youtube.com/watch?v=oq29KUy29iQ&t=306s">video</a> expl
 
 <details><summary>Example</summary>
   
-  ![image](https://user-images.githubusercontent.com/91686183/190930361-324d337c-5960-4ea3-973a-1315be931b0f.png)
-
+  ![image](https://user-images.githubusercontent.com/91686183/190930661-b8c051ca-4cce-488b-8295-fc9886a9f872.png)
+  
 </details>
 
 ## Preview
@@ -72,7 +78,7 @@ This <a href="https://www.youtube.com/watch?v=oq29KUy29iQ&t=306s">video</a> expl
 
 <details><summary>My grade</summary>
   
-  ![image](https://user-images.githubusercontent.com/91686183/169928122-e9d298b3-7720-40ba-b932-07404a8c2e15.png)
+  ![image](https://user-images.githubusercontent.com/91686183/169927289-9e8dcfa1-7789-4b1d-a6fb-b9d1b8f90dce.png)
   
 </details>
 
