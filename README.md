@@ -14,7 +14,7 @@ In this project, you will learn the basics of threading a process. You will see 
   - The philosophers alternatively eat, think, or sleep. While they are eating, they are not thinking nor sleeping; while thinking, they are not eating nor sleeping; and, of course, while sleeping, they are not eating nor thinking.
   - There are also forks on the table. There are as many forks as philosophers.
   - Because serving and eating spaghetti with only one fork is very inconvenient, a philosopher takes their right and their left forks to eat, one in each hand.
-  - When a philosopher has finished eating, they put their forks back on the table and start sleeping. Once awake, they start thinking again. The simulation stops when a philosopher dies of starvation.
+  - When a philosopher has finished eating, they put thttps://man7.org/linux/man-pages/man3/usleep.3.htmlheir forks back on the table and start sleeping. Once awake, they start thinking again. The simulation stops when a philosopher dies of starvation.
   - Every philosopher needs to eat and should never starve.
   - Philosophers don’t speak with each other.
   - Philosophers don’t know if another philosopher is about to die.
@@ -27,8 +27,8 @@ In this project, you will learn the basics of threading a process. You will see 
 
 ### Functions Manual
 
-  - <a href="https://man7.org/linux/man-pages/man2/usleep.2.html">usleep()</a> 
-  - <a href="https://man7.org/linux/man-pages/man2/gettimeofday.2.html">gettimeofday()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/usleep.3.html">usleep()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/gettimeofday.3.html">gettimeofday()</a> 
   - <a href="https://man7.org/linux/man-pages/man3/pthread_create.3p.html">pthread_create()</a>
   - <a href="https://man7.org/linux/man-pages/man3/pthread_mutex_init.3p.html">pthread_mutex_init()</a> 
   - <a href="https://man7.org/linux/man-pages/man2/pipe.2.html">pipe</a> 
