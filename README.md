@@ -30,4 +30,54 @@ In this project, you will learn the basics of threading a process. You will see 
   - <a href="https://man7.org/linux/man-pages/man3/usleep.3.html">usleep()</a> 
   - <a href="https://man7.org/linux/man-pages/man2/settimeofday.2.html">gettimeofday()</a> 
   - <a href="https://man7.org/linux/man-pages/man3/pthread_create.3p.html">pthread_create()</a>
+  - <a href="https://man7.org/linux/man-pages/man3/pthread_detach.3p.html">pthread_detach()</a>
+  - <a href="https://man7.org/linux/man-pages/man3/pthread_join.3p.html">pthread_join()</a>
   - <a href="https://man7.org/linux/man-pages/man3/pthread_mutex_init.3p.html">pthread_mutex_init()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/pthread_mutex_destroy.3p.html">pthread_mutex_destroy()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/pthread_mutex_lock.3p.html">pthread_mutex_lock()</a> 
+  - <a href="https://man7.org/linux/man-pages/man3/pthread_mutex_unlock.3p.html">pthread_mutex_unlock()</a> 
+
+### Threads
+
+Because each philosopher is a thread we need to understand what a thread is.
+
+A thread is a path of execution within a process. A process can contain multiple threads.
+
+In the philo program there can be a lot of threads. That means each philosopher(thread) is executing within a main thread. Every philo is eating, sleeping or thinking at the same time.
+
+This <a href="https://www.youtube.com/watch?v=d9s_d28yJq0&t=287s">video</a> explains how to use threads in your C program.
+
+### Mutexes
+
+Because each philosopher must eat using his and other philosopher's fork, there can be an issue when two philosophers try the same fork at the same time 
+
+A mutex is a programming concept that is frequently used to solve multi-threading problems.
+
+Is used when there is any chance of two threads accessing the same process data at the same time. For example, if a thread is changing a variable value when other thread is reading it.
+
+This <a href="https://www.youtube.com/watch?v=oq29KUy29iQ&t=306s">video</a> explains how to use mutexes in your C program.
+
+<details><summary>Example</summary>
+  
+  ![image](https://user-images.githubusercontent.com/91686183/190930361-324d337c-5960-4ea3-973a-1315be931b0f.png)
+
+</details>
+
+## Preview
+
+<details><summary>My Philo</summary>
+  
+  
+</details>
+
+<details><summary>My grade</summary>
+  
+  ![image](https://user-images.githubusercontent.com/91686183/169928122-e9d298b3-7720-40ba-b932-07404a8c2e15.png)
+  
+</details>
+
+<hr>
+
+I hope you found it interesting!
+
+If you are going to do philosophers, I wish you good luck and hope that you learned something here!
