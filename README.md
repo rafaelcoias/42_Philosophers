@@ -73,6 +73,7 @@ This <a href="https://www.youtube.com/watch?v=oq29KUy29iQ&t=306s">video</a> expl
 
 <details><summary>My Philo</summary>
   
+  ![Screencast from 18-09-2022 23_52_58](https://user-images.githubusercontent.com/91686183/190931695-93215ce2-81a3-4132-b0b8-c41b25ccfe93.gif)
   
 </details>
 
