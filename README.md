@@ -27,10 +27,10 @@ In this project, you will learn the basics of threading a process. You will see 
 
 ### Functions Manual
 
-  - <a href="https://man7.org/linux/man-pages/man2/access.2.html">usleep()
-  - <a href="https://man7.org/linux/man-pages/man2/dup.2.html">dup()</a> 
-  - <a href="https://man7.org/linux/man-pages/man2/fork.2.html">fork()</a>
-  - <a href="https://man7.org/linux/man-pages/man2/execve.2.html">execve()</a> 
+  - <a href="https://man7.org/linux/man-pages/man2/usleep.2.html">usleep()</a> 
+  - <a href="https://man7.org/linux/man-pages/man2/gettimeofday.2.html">gettimeofday()</a> 
+  - <a href="https://man7.org/linux/man-pages/man2/pthread_create.2.html">pthread_create()</a>
+  - <a href="https://man7.org/linux/man-pages/man2/pthread_mutex_init.2.html">pthread_mutex_init()</a> 
   - <a href="https://man7.org/linux/man-pages/man2/pipe.2.html">pipe</a> 
   - <a href="https://man7.org/linux/man-pages/man2/unlink.2.html">unlink()</a> 
   - <a href="https://man7.org/linux/man-pages/man2/wait.2.html">wait()</a>
