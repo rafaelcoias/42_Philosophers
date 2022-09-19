@@ -69,7 +69,7 @@ void	*routine(void *p)
 
 	philo = (t_philo *)p;
 	data = philo->data;
-	if (philo->id % 2 == 0)
+	if (philo->id % 2 != 0)
 		ft_usleep(10);
 	while (check_death(data))
 	{

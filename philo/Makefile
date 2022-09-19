@@ -80,11 +80,9 @@ RM = rm -rf
 
 ########## 		  MESSAGES 		##########
 
-CREATE_PROJ_MSG = @echo "\n<========== $(GREEN)$(NAME) created$(RESET) ==========>\n"
+CREATE_PROJ_MSG = @echo "\n[ $(GREEN)$(NAME) created$(RESET) ]\n"
 
-CREATE_BONUS_MSG = @echo "\n<========== $(GREEN)$(BONUS) created$(RESET) ==========>\n"
-
-REMOVED_MSG = @echo "\n<========== $(RED)$(NAME) removed$(RESET) ==========>\n"
+REMOVED_MSG = @echo "\n[ $(RED)$(NAME) removed$(RESET) ]\n"
 
 NORM_LIBFT_MSG = @echo "\n<========== $(YELLOW)Norm $(LIBFT)$(RESET) ==========>\n"
 
